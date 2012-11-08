@@ -26,8 +26,6 @@ public class TextureImporter2D : AssetPostprocessor {
 			importer.mipmapEnabled = false;
 			importer.maxTextureSize = TextureSetMaxSize(texture.width, texture.height);
 			importer.textureFormat = TextureImporterFormat.RGBA32;
-			
-			//Somehow needed to write changes when importing
 			texture.anisoLevel = 0;
 	    	texture.filterMode = FilterMode.Point;
 			texture.wrapMode = TextureWrapMode.Clamp;

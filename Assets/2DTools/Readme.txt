@@ -1,5 +1,22 @@
 --------------Usage and notes------------------
-
+Add UVSprite to sprites you want to animate.
+In Inspector view:
+	Set in Cell horizontal size and Cell vertical size the pixel dimension of a single sprite's full box. (eg. sprites in your sheet are 13 px wide, but you drawn them in a 16px box, 16 is the value that should be used)
+	Starting cell is the cell to be used when no animation plays (and for object with no animation at all). The top-left corner is cell 0-0.
+	Mirrored tells the sprite to mirror itself. Animations will be automatically mirrored when this toggle is on.
+	Under "Animations", press "Add" to add one.
+		Name will be used to call this particular animation in scripts.
+		Next animation is the animation that will follow this one when it ends. Use "none" (or leave it blank) to stop the animation and set the sprite back to its starting cell. Use "loop" or the same animation name to loop endlessly the same animation over and over. Use "keep" or "stop" to stop the animation and keep this frame.
+		Starting cell tells the script where to look for the first image or frame.
+		Length in frames set the number of frames the animation is composed of.
+		Frame duration is the time (in seconds, float value) each frame/image should be visible before switching to the next one.
+	Pressing "Delete" near an animation will delete that particular animation.
+	
+How to play animations:
+Inside your game scripts get call setAnimation(animation name) from an object to start an animation sequence.
+Example (try it in your create or awake):
+	UVSprite spr = transform.GetComponent<UVSprite>();
+	spr.setAnimation("myAnimation");
 
 
 Please note:
@@ -8,11 +25,8 @@ Please note:
 - Example scene, texture and it's relative material can be safely deleted.
 
 --------------Changelog------------------------
-Version 0.02
-	-Added SetPxAnimation()
-
 Version 0.01
-	-First version
+	-First published version
 --------------Credits--------------------------
 Created by
 	Andrea Giorgio "Muu?" Cerioli

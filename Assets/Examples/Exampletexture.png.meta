@@ -30,4 +30,8 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   textureType: 5
-  buildTargetSettings: []
+  buildTargetSettings:
+  - buildTarget: Web
+    maxTextureSize: 128
+    textureFormat: 5
+    compressionQuality: 50

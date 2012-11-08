@@ -15,7 +15,8 @@ public class UVSpriteInspector : Editor {
 								startingVerticalCell,
 								startMirrored,
 								animations;
-
+	
+	//Link seralized vars to local ones.
 	void OnEnable () {
 		sprite = new SerializedObject(target);
 		cellHorizontalSize = sprite.FindProperty("cellHorizontalSize");
@@ -70,10 +71,8 @@ public class UVSpriteInspector : Editor {
 			EditorGUILayout.LabelField("Animation " + i.ToString() + ": ");
 			if (GUILayout.Button("Delete", EditorStyles.miniButton, GUILayout.MaxWidth(100)))	{
 				animations.DeleteArrayElementAtIndex(i);
-				// If it was the last element, break the script
-				if (animations.arraySize == 0) {
-					break;	
-				}
+				// Break the script, avoiding "wrong index" or null reference (if arraySize becomes 0) calls later.
+				break;
 			}
 			EditorGUILayout.EndHorizontal();
 			// Edit in this order: Animation Name, Next Animation, Starting Cell (both hor and ver), Number of frames, Frame duration.
@@ -87,10 +86,10 @@ public class UVSpriteInspector : Editor {
 			EditorGUILayout.LabelField("Starting hor. cell ");
 			EditorGUILayout.PropertyField(anim.FindPropertyRelative("startingHorizontalCell"), GUIContent.none);
 			EditorGUILayout.LabelField("Starting ver. cell ");
-			EditorGUILayout.PropertyField(anim.FindPropertyRelative("srartingVerticalCell"), GUIContent.none);
+			EditorGUILayout.PropertyField(anim.FindPropertyRelative("startingVerticalCell"), GUIContent.none);
 			EditorGUILayout.EndHorizontal();
 			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.LabelField("Lenght in frames");
+			EditorGUILayout.LabelField("Length in frames");
 			EditorGUILayout.PropertyField(anim.FindPropertyRelative("frames"), GUIContent.none);
 			EditorGUILayout.LabelField("Frame duration");
 			EditorGUILayout.PropertyField(anim.FindPropertyRelative("frameDuration"), GUIContent.none);
