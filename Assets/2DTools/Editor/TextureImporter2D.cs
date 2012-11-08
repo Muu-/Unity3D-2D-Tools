@@ -1,9 +1,5 @@
 /// Used to import textures with pre-selected settings
-/// 
-/// Author: Andrea Giorgio "Muu?" Cerioli
-/// Website: www.lanoiadimuu.it
-/// License: 100% Freedom. You can edit it, use it in both free and commercial project
-
+/// Feel free to delete this file if you don't need it.
 
 using UnityEngine;
 using UnityEditor;

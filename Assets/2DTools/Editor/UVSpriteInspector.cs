@@ -1,3 +1,6 @@
+/// Draws inspector stuff for UVSprite's data and animations.
+/// 
+
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
@@ -25,7 +28,6 @@ public class UVSpriteInspector : Editor {
 
 	
 	
-	// Draw on inspector GUI	
 	public override void OnInspectorGUI() {
 		sprite.Update();
 		
@@ -95,7 +97,7 @@ public class UVSpriteInspector : Editor {
 			EditorGUILayout.EndHorizontal();
 		}
 		
-		//Lastly, apply stuff
+		//Apply stuff
 		sprite.ApplyModifiedProperties();
 	}
 }

@@ -1,3 +1,5 @@
+/// Can be called from UVSprite and/or other scripts to set object's texture data.
+
 using UnityEngine;
 using System.Collections;
 

@@ -3,10 +3,6 @@
 /// 	From Unity Editor
 /// 		Game Object -> Create Other -> Create Quad
 /// 		or use it's shortcut: CTRL+Q
-/// 
-/// Author: Andrea Giorgio "Muu?" Cerioli
-/// Website: www.lanoiadimuu.it
-/// License: 100% Freedom. You can edit it, use it in both free and commercial project
 
 using UnityEngine;
 using UnityEditor;
