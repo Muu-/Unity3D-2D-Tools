@@ -1,5 +1,4 @@
 /// Draws inspector stuff for UVSprite's data and animations.
-/// 
 
 using UnityEngine;
 using UnityEditor;
@@ -13,7 +12,7 @@ public class UVSpriteInspector : Editor {
 								cellVerticalSize,
 								startingHorizontalCell,
 								startingVerticalCell,
-								startMirrored,
+								mirroredImage,
 								animations;
 	
 	//Link seralized vars to local ones.
@@ -23,7 +22,7 @@ public class UVSpriteInspector : Editor {
 		cellVerticalSize = sprite.FindProperty("cellVerticalSize");
 		startingHorizontalCell = sprite.FindProperty("startingHorizontalCell");
 		startingVerticalCell = sprite.FindProperty("startingVerticalCell");
-		startMirrored = sprite.FindProperty("startMirrored");
+		mirroredImage = sprite.FindProperty("mirroredImage");
 		animations = sprite.FindProperty("animations");
 	}
 
@@ -46,7 +45,7 @@ public class UVSpriteInspector : Editor {
 		EditorGUILayout.PropertyField(startingHorizontalCell, new GUIContent("Staring hor. cell"), true);
 		EditorGUILayout.PropertyField(startingVerticalCell, new GUIContent("Starting ver. cell"), true);
 		EditorGUILayout.EndHorizontal();
-		EditorGUILayout.PropertyField(startMirrored, new GUIContent("Mirrored"), true);
+		EditorGUILayout.PropertyField(mirroredImage, new GUIContent("Mirrored"), true);
 		// Set animations part
 		// Draw an "add" button, used to increase array size
 		EditorGUILayout.Space();

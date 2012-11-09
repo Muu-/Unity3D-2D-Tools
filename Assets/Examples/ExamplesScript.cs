@@ -18,6 +18,10 @@ public class ExamplesScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			UVSprite spr = transform.GetComponent<UVSprite>();
+			spr.setMirror();
+		}
 	}
 }

@@ -1,28 +1,38 @@
 --------------Usage and notes------------------
 Add UVSprite to sprites you want to animate.
-In Inspector view:
+INSPECTOR VIEW:
 	Set in Cell horizontal size and Cell vertical size the pixel dimension of a single sprite's full box. (eg. sprites in your sheet are 13 px wide, but you drawn them in a 16px box, 16 is the value that should be used)
 	Starting cell is the cell to be used when no animation plays (and for object with no animation at all). The top-left corner is cell 0-0.
 	Mirrored tells the sprite to mirror itself. Animations will be automatically mirrored when this toggle is on.
 	Under "Animations", press "Add" to add one.
 		Name will be used to call this particular animation in scripts.
-		Next animation is the animation that will follow this one when it ends. Use "none" (or leave it blank) to stop the animation and set the sprite back to its starting cell. Use "loop" or the same animation name to loop endlessly the same animation over and over. Use "keep" or "stop" to stop the animation and keep this frame.
+		Next animation is the animation that will follow this one when it ends. Use "starting" or "none" to stop the animation and set the sprite back to its starting cell. Use "loop" or the same animation name to loop endlessly the same animation over and over. Use "stop" or leave it blank to stop the animation and keep it's last frame.
 		Starting cell tells the script where to look for the first image or frame.
 		Length in frames set the number of frames the animation is composed of.
 		Frame duration is the time (in seconds, float value) each frame/image should be visible before switching to the next one.
 	Pressing "Delete" near an animation will delete that particular animation.
+
+FUNCTIONS:
+Note: Remember to call something like
+	UVSprite mySprite = transform.GetComponent<UVSprite>();
+during create, awake or rigth before calling any other function. In those example I use "mySprite" as reference name.
+
+setAnimation(animation name)
+Call it from an object to start an animation sequence. Animation name must be a string like this example:
+	mySprite.setAnimation("myAnimation");
 	
-How to play animations:
-Inside your game scripts get call setAnimation(animation name) from an object to start an animation sequence.
-Example (try it in your create or awake):
-	UVSprite spr = transform.GetComponent<UVSprite>();
-	spr.setAnimation("myAnimation");
+setSingleImage(horizontal cell, vertical cell)
+This function will stop any playing animation and set a fixed image as sprite by telling its horizontal and vertical position. This example will set the top-leftmost one.
+	mySprite.setSingleImage(0, 0);
+	
+setMirror()
+Toggle image mirroring. You can specify true or false inside parentheses to selectively turn it ON or OFF.
 
 
 Please note:
 - Best used with tiled animation and sprites
 - The script only support animaton frames on the same line.
-- Example scene, texture and it's relative material can be safely deleted.
+- Example folder (scene, script, texture and it's relative material) can be safely deleted.
 
 --------------Changelog------------------------
 Version 0.01

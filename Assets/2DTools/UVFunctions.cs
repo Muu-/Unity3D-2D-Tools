@@ -21,7 +21,6 @@ public static class UVFunctions {
 			newUV[1] = start;//BL
 			newUV[2] = start + uvCellSize;//UR
 			newUV[3] = start + Vector2.right * uvCellSize.x;//BR	
-			
 		}
 		
 		// Stores the new UV mapping
