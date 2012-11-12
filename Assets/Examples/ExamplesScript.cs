@@ -5,13 +5,13 @@ public class ExamplesScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		UVSprite spr = transform.GetComponent<UVSprite>();
+		UVSprite mySprite = transform.GetComponent<UVSprite>();
 		switch (gameObject.name) {
 		case "Loop":
-			spr.setAnimation("loopexample");
+			mySprite.setAnimation("loopexample");
 			break;
 		case "one-two":
-			spr.setAnimation("one");
+			mySprite.setAnimation("one");
 			break;
 		}
 	}
@@ -20,8 +20,8 @@ public class ExamplesScript : MonoBehaviour {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			UVSprite spr = transform.GetComponent<UVSprite>();
-			spr.setMirror();
+			UVSprite mySprite = transform.GetComponent<UVSprite>();
+			mySprite.setMirror();
 		}
 	}
 }

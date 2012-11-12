@@ -1,5 +1,7 @@
 --------------Usage and notes------------------
-Add UVSprite to sprites you want to animate.
+Create an object by selecting from menu GameObject -> Create Other -> Create Quad or by pressing CTLR+Q.
+
+Then add UVSprite to sprites you want to animate.
 INSPECTOR VIEW:
 	Set in Cell horizontal size and Cell vertical size the pixel dimension of a single sprite's full box. (eg. sprites in your sheet are 13 px wide, but you drawn them in a 16px box, 16 is the value that should be used)
 	Starting cell is the cell to be used when no animation plays (and for object with no animation at all). The top-left corner is cell 0-0.
@@ -15,7 +17,7 @@ INSPECTOR VIEW:
 FUNCTIONS:
 Note: Remember to call something like
 	UVSprite mySprite = transform.GetComponent<UVSprite>();
-during create, awake or rigth before calling any other function. In those example I use "mySprite" as reference name.
+during create, awake or right before calling any other of the following functions. In those examples I use "mySprite" as reference name, you can use whatever name fits your programming habit.
 
 setAnimation(animation name)
 Call it from an object to start an animation sequence. Animation name must be a string like this example:
@@ -33,8 +35,15 @@ Please note:
 - Best used with tiled animation and sprites
 - The script only support animaton frames on the same line.
 - Example folder (scene, script, texture and it's relative material) can be safely deleted.
-
+----------------FAQs---------------------------
+Q: Does it support pixel perfect sprites?
+A: It should. Set your scene camera to Orthographic mode, then its size to vertical resolution / 2 (eg. if running 640x480, size should be 240).
 --------------Changelog------------------------
+Version 0.01a
+	-Added a static image example
+	-README: Added instruction on how to create quad sprites
+	-README: Added FAQs section
+
 Version 0.01
 	-First published version
 --------------Credits--------------------------
