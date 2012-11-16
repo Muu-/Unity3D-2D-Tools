@@ -14,17 +14,27 @@ public class UVSprite : MonoBehaviour {
 					startingVerticalCell = 0;
 	
 	// Variables used during runtime
-	public bool 	mirroredImage = false;					// This bool will be used at start and during runtime to check if the sprite should be mirrored or not. Please set or toggle it using setMirror() or setMirror(bool).
+	public bool 	mirroredImage = false;					// This bool will be used at start and during runtime to check if the sprite should be mirrored or not. Please set or toggle it using SetMirror() or SetMirror(bool).
 	public UVAnimation[] animations = new UVAnimation[0];	// Store animations to play during runtime
+	public string firstAnimationToPlay;						// Autoplay this animation during start
 	private UVAnimation currentAnimation = null;			// Stores the currently playing animation.
 	private float animationTimer = 0;						// Used to check when to draw next frame
 	private int currentFrame = 0;							// Stores frame No
 	
 	// Use this for initialization
 	void Awake () {
-		// Store the actual mesh and set the starting image when the game starts
+		// Store the actual mesh
 		mesh = GetComponent<MeshFilter>().mesh;
-		setSingleImage(startingHorizontalCell, startingVerticalCell);
+		if (String.IsNullOrEmpty(firstAnimationToPlay))
+		{
+			//If no animation is selected for autoplay, set the starting image when the game starts
+			SetSingleImage(startingHorizontalCell, startingVerticalCell);
+		}
+		else
+		{
+			//Else set the fixed image
+			SetAnimation(firstAnimationToPlay);
+		}
 	}
 	
 	// Update is called once per frame
@@ -42,14 +52,14 @@ public class UVSprite : MonoBehaviour {
 			currentFrame += 1; 													// Start by increasing currentFrame value
 			if (currentFrame < currentAnimation.frames)							// Check if there are more frames after current one
 			{
-				setFramedImage();												// If yes, set the next frame image
+				SetFramedImage();												// If yes, set the next frame image
 				animationTimer = currentAnimation.frameDuration;				// and reset animationTimer to wait for next frame
 			}
 			else 																// If the current frame was the last one
 			{				
 				if (currentAnimation.nextAnimation == "starting"  || currentAnimation.nextAnimation == "none")					// Reset to starting frame
 				{
-					setSingleImage(startingHorizontalCell, startingVerticalCell);
+					SetSingleImage(startingHorizontalCell, startingVerticalCell);
 				}
 				else if (string.IsNullOrEmpty(currentAnimation.nextAnimation) || currentAnimation.nextAnimation == "stop")		// Stop the animation and keep it's last frame
 				{
@@ -57,31 +67,31 @@ public class UVSprite : MonoBehaviour {
 				}
 				else if (currentAnimation.nextAnimation == currentAnimation.name || currentAnimation.nextAnimation == "loop")	// Loop the same animation
 				{
-					resetAnimation();
+					ResetAnimation();
 				} 
 				else 																											// Start another animation
 				{
-					setAnimation(currentAnimation.nextAnimation);
+					SetAnimation(currentAnimation.nextAnimation);
 				}			
 			}
 		}
 	}
 	
 	// Sets a single image by indicating its cells
-	public void setSingleImage(int horCell, int verCell){
+	public void SetSingleImage(int horCell, int verCell){
 		UVFunctions.SetUVByPixelSizes(new Vector2(horCell, verCell), new Vector2(cellHorizontalSize, cellVerticalSize), mirroredImage, mesh, GetComponent<MeshRenderer>().sharedMaterial.mainTexture);
 		currentAnimation = null;
 	}
 	
 	// Called during animation play to set current image index.
-	private void setFramedImage() {
+	private void SetFramedImage() {
 		UVFunctions.SetUVByPixelSizes(new Vector2((currentAnimation.startingHorizontalCell+currentFrame), currentAnimation.startingVerticalCell), new Vector2(cellHorizontalSize, cellVerticalSize), mirroredImage, mesh, GetComponent<MeshRenderer>().sharedMaterial.mainTexture);	
 			//Debug.Log("" + gameObject.name + " set frame " + (currentFrame+1).ToString() + " in <" + currentAnimation.name + "> as current image");
 	
 	}
 	
 	// Starts timer and set current frame to 1, allowing the animation to start (or to loop) from it's first frame.
-	private void resetAnimation() {
+	private void ResetAnimation() {
 		animationTimer = currentAnimation.frameDuration;
 		currentFrame = 0;
 		UVFunctions.SetUVByPixelSizes(new Vector2((currentAnimation.startingHorizontalCell), currentAnimation.startingVerticalCell), new Vector2(cellHorizontalSize, cellVerticalSize), mirroredImage, mesh, GetComponent<MeshRenderer>().sharedMaterial.mainTexture);	
@@ -89,28 +99,28 @@ public class UVSprite : MonoBehaviour {
 	}
 	
 	// Call this function to set current animation, it will automatically call reset function to start it.
-	public void setAnimation (string animationName){
+	public void SetAnimation (string animationName){
 		for (int i = 0; i < animations.Length; i++)
 		{
 			if (animations[i].name == animationName)
 			{
 				currentAnimation = animations[i];
-				resetAnimation();
+				ResetAnimation();
 				return;
 			}
 		}
 		Debug.LogWarning("Warning: " + gameObject.name + " (Instance: " + gameObject.GetInstanceID() + ") was not able to find <" + animationName + "> animation", gameObject);
 	}
 	
-	// Calling setMirror with no arguments will invert mirrored state.
-	public bool setMirror() {
+	// Calling SetMirror with no arguments will invert mirrored state.
+	public bool SetMirror() {
 		bool mirrorStatus;
 		switch (mirroredImage) {
 		case true:
-			mirrorStatus = setMirror(false);
+			mirrorStatus = SetMirror(false);
 			return mirrorStatus;
 		case false:
-			mirrorStatus = setMirror(true);
+			mirrorStatus = SetMirror(true);
 			return mirrorStatus;	
 		}
 		//This part of code should never be executed
@@ -120,9 +130,9 @@ public class UVSprite : MonoBehaviour {
 	}
 	
 	// Set mirrored state to true or false.
-	public bool setMirror(bool trueOrFalse) {
+	public bool SetMirror(bool trueOrFalse) {
 		mirroredImage = trueOrFalse;
-		setFramedImage();
+		SetFramedImage();
 		return mirroredImage;
 	}
 	

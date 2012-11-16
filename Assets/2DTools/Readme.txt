@@ -6,6 +6,7 @@ INSPECTOR VIEW:
 	Set in Cell horizontal size and Cell vertical size the pixel dimension of a single sprite's full box. (eg. sprites in your sheet are 13 px wide, but you drawn them in a 16px box, 16 is the value that should be used)
 	Starting cell is the cell to be used when no animation plays (and for object with no animation at all). The top-left corner is cell 0-0.
 	Mirrored tells the sprite to mirror itself. Animations will be automatically mirrored when this toggle is on.
+	Autoplay animation, will tell the script to play a stored animation. This function may be useful for looping animated background objects.
 	Under "Animations", press "Add" to add one.
 		Name will be used to call this particular animation in scripts.
 		Next animation is the animation that will follow this one when it ends. Use "starting" or "none" to stop the animation and set the sprite back to its starting cell. Use "loop" or the same animation name to loop endlessly the same animation over and over. Use "stop" or leave it blank to stop the animation and keep it's last frame.
@@ -19,15 +20,15 @@ Note: Remember to call something like
 	UVSprite mySprite = transform.GetComponent<UVSprite>();
 during create, awake or right before calling any other of the following functions. In those examples I use "mySprite" as reference name, you can use whatever name fits your programming habit.
 
-setAnimation(animation name)
+SetAnimation(animation name)
 Call it from an object to start an animation sequence. Animation name must be a string like this example:
-	mySprite.setAnimation("myAnimation");
+	mySprite.SetAnimation("myAnimation");
 	
-setSingleImage(horizontal cell, vertical cell)
+SetSingleImage(horizontal cell, vertical cell)
 This function will stop any playing animation and set a fixed image as sprite by telling its horizontal and vertical position. This example will set the top-leftmost one.
-	mySprite.setSingleImage(0, 0);
+	mySprite.SetSingleImage(0, 0);
 	
-setMirror()
+SetMirror()
 Toggle image mirroring. You can specify true or false inside parentheses to selectively turn it ON or OFF.
 
 
@@ -39,6 +40,12 @@ Please note:
 Q: Does it support pixel perfect sprites?
 A: It should. Set your scene camera to Orthographic mode, then its size to vertical resolution / 2 (eg. if running 640x480, size should be 240).
 --------------Changelog------------------------
+Versione 0.02
+	-Added animation autoplay feature.
+	-Edited Loop example to show an example of this new feature.
+	-Renamed a bunch of function to uppercase
+	-Renamed ExamplesScript to SetAnimationExample
+
 Version 0.01a
 	-Added a static image example
 	-README: Added instruction on how to create quad sprites

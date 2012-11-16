@@ -13,6 +13,7 @@ public class UVSpriteInspector : Editor {
 								startingHorizontalCell,
 								startingVerticalCell,
 								mirroredImage,
+								firstAnimation,
 								animations;
 	
 	//Link seralized vars to local ones.
@@ -24,6 +25,7 @@ public class UVSpriteInspector : Editor {
 		startingVerticalCell = sprite.FindProperty("startingVerticalCell");
 		mirroredImage = sprite.FindProperty("mirroredImage");
 		animations = sprite.FindProperty("animations");
+		firstAnimation = sprite.FindProperty("firstAnimationToPlay");
 	}
 
 	
@@ -47,10 +49,11 @@ public class UVSpriteInspector : Editor {
 		EditorGUILayout.EndHorizontal();
 		EditorGUILayout.PropertyField(mirroredImage, new GUIContent("Mirrored"), true);
 		// Set animations part
-		// Draw an "add" button, used to increase array size
 		EditorGUILayout.Space();
+		EditorGUILayout.PropertyField(firstAnimation, new GUIContent("Autoplay animation: "), GUILayout.MaxWidth(300));
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.LabelField("Animations:");
+		// Draw an "add" button, used to increase animations array size
 		if (GUILayout.Button("Add", EditorStyles.miniButton, GUILayout.MaxWidth(100)))
 		{
 			// If there's no array, increase its size to create it
