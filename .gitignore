@@ -2,7 +2,7 @@
 /Library
 /Temp
 /Builds
-
+/ProjectSettings
 
 #Project/User Preference Files
 *.sln
